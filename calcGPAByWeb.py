@@ -23,7 +23,7 @@ def GetHtmlFormVAMK(stuID, password):
 
 def extractCourses(text):
     coursesList = []
-    courses = re.findall(r'["d]>\d+,\d+ CR.*?[\dMS]', text) 
+    courses = re.findall(r'["d]>\d+,\d+ [CR|OP].*?[\dMS]', text) 
     for course in courses:
         course = re.findall('\d+\.\d+|[\dMS]', course.replace(',','.'))
         coursesList.append(course)
@@ -55,8 +55,8 @@ def gpaCalcByCoursesList(coursesList):
     print('-----------------Details------------------')
     print('Total credits: ' + str(normalCredits + MCredits + sCredits))
     print('Normal credits: ' + str(normalCredits))
-    print('M credits:' + str(MCredits))
-    print('S credits:' + str(sCredits))
+    print('M credits: ' + str(MCredits))
+    print('S credits: ' + str(sCredits))
     print('Grades summary:')    
     for i in range(6):
         print('  Grade {}: {}'.format(i, str(CoursesGrades[i])))

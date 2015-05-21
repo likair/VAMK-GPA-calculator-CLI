@@ -5,7 +5,7 @@
 * This program won't save any data of you to your local machine or the cloud.
 
 # Evironment
-Python 3.* is required. No matter your are in Windows, Linux or Mac OS.
+Python 3.* is required. No matter your are in [Windows](https://www.python.org/ftp/python/3.4.3/python-3.4.3.msi), Linux or Mac OS.
 
 # Contact me
 [facebook](https://www.facebook.com/lebs.eu)

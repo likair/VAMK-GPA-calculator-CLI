@@ -6,19 +6,19 @@ Created on May 21, 2015
 import re,urllib, http.cookiejar,getpass
 
 def GetHtmlFormVAMK(stuID, password):
-    logincookieraw = http.cookiejar.LWPCookieJar()
-    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(logincookieraw))
-    start_path = "https://secure.puv.fi/wille/elogon.asp"
-    login_path = "https://secure.puv.fi/wille/elogon.asp?dfUsername?dfPassword?dfUsernameHuoltaja"
-    login_data = urllib.parse.urlencode({'dfUsernameHidden' : stuID , 'dfPasswordHidden' : password}).encode()
-    left = "https://secure.puv.fi/wille/emainval.asp"
-    req_path = "https://secure.puv.fi/wille/eWilleNetLink.asp?Link=https://secure.puv.fi/willenet/HopsSuoritukset.aspx&Hyv=1&Opjakso=&ArvPvm="
-    request_data = urllib.parse.urlencode({'rbRajaus' : 'rbSuoritukset' , 'dfOpjakso' : '' , 'dfArviointipvm' : ''}).encode()
+    loginCookie = http.cookiejar.LWPCookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(loginCookie))
+    startUrl = "https://secure.puv.fi/wille/elogon.asp"
+    loginUrl = "https://secure.puv.fi/wille/elogon.asp?dfUsername?dfPassword?dfUsernameHuoltaja"
+    loginData = urllib.parse.urlencode({'dfUsernameHidden' : stuID , 'dfPasswordHidden' : password}).encode()
+    leftFrameUrl = "https://secure.puv.fi/wille/emainval.asp"
+    requestUrl = "https://secure.puv.fi/wille/eWilleNetLink.asp?Link=https://secure.puv.fi/willenet/HopsSuoritukset.aspx&Hyv=1&Opjakso=&ArvPvm="
+    requestData = urllib.parse.urlencode({'rbRajaus' : 'rbSuoritukset' , 'dfOpjakso' : '' , 'dfArviointipvm' : ''}).encode()
 
-    opener.open(start_path)
-    opener.open(login_path, login_data)
-    opener.open(left)
-    return(opener.open(req_path, request_data).read().decode('utf-8'))
+    opener.open(startUrl)
+    opener.open(loginUrl, loginData)
+    opener.open(leftFrameUrl)
+    return(opener.open(requestUrl, requestData).read().decode('utf-8'))
 
 
 def extractCourses(text):

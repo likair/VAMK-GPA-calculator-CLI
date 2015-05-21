@@ -1,9 +1,10 @@
+#!/usr/bin/python3
 '''
 Created on May 21, 2015
 
 @author: Likai
 '''
-import re,urllib, http.cookiejar,getpass
+import re,urllib, http.cookiejar,getpass,platform
 
 def GetHtmlFormVAMK(stuID, password):
     loginCookie = http.cookiejar.LWPCookieJar()
@@ -23,7 +24,7 @@ def GetHtmlFormVAMK(stuID, password):
 
 def extractCourses(text):
     coursesList = []
-    courses = re.findall(r'["d]>\d+,\d+ [CO].*?>[\dMS]<', text) 
+    courses = re.findall(r'["d]>\d+,\d+ [CO].*?>[\dMS]<', text)
     for course in courses:
         course = re.findall(r'\d+\.\d+|&nbsp;|[\dMS]', course.replace(',','.'))
         course.pop(1)
@@ -36,7 +37,7 @@ def gpaCalcByCoursesList(coursesList):
     normalCredits = 0
     MCredits = 0
     sCredits = 0
-    
+
     CoursesGrades = [0, 0, 0, 0, 0, 0, 0, 0]
     if coursesList != []:
         for course in coursesList:
@@ -59,7 +60,7 @@ def gpaCalcByCoursesList(coursesList):
     print('Normal credits: ' + str(normalCredits))
     print('M credits: ' + str(MCredits))
     print('S credits: ' + str(sCredits))
-    print('Grades summary:')    
+    print('Grades summary:')
     for i in range(6):
         print('  Grade {}: {}'.format(i, str(CoursesGrades[i])))
     print('  Grade M: ' + str(CoursesGrades[6]))
@@ -68,7 +69,7 @@ def gpaCalcByCoursesList(coursesList):
 if __name__ == '__main__':
     while True:
         try:
-            print('**************GPA in VAMK*****************')    
+            print('**************GPA in VAMK*****************')
             stuID = input('Input your student ID: ')
             password = getpass.getpass('Input your password: ')
             if stuID == '' or password == '':
@@ -79,6 +80,6 @@ if __name__ == '__main__':
             print('Error!')
         finally:
             print('------------------------------------------')
-        if(input('Input "q" to continue, or any other key to continue:') == 'q'):
+        if(platform.system() == 'Linux' or input('Input "q" to continue, or any other key to continue:') == 'q'):
             print('Bye bye! ---- Lebs')
             break

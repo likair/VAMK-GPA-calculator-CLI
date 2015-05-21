@@ -23,9 +23,11 @@ def GetHtmlFormVAMK(stuID, password):
 
 def extractCourses(text):
     coursesList = []
-    courses = re.findall(r'["d]>\d+,\d+ [CR|OP].*?[\dMS]', text) 
+    courses = re.findall(r'["d]>\d+,\d+ [CO].*?>[\dMS]<', text) 
     for course in courses:
-        course = re.findall('\d+\.\d+|[\dMS]', course.replace(',','.'))
+        course = re.findall(r'\d+\.\d+|&nbsp;|[\dMS]', course.replace(',','.'))
+        course.pop(1)
+        course.pop(1)
         coursesList.append(course)
     return coursesList
 

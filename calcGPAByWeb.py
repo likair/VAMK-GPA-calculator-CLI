@@ -3,7 +3,7 @@ Created on May 21, 2015
 
 @author: Likai
 '''
-import re,urllib, http.cookiejar
+import re,urllib, http.cookiejar,getpass
 
 def GetHtmlFormVAMK(stuID, password):
     logincookieraw = http.cookiejar.LWPCookieJar()
@@ -23,7 +23,7 @@ def GetHtmlFormVAMK(stuID, password):
 
 def extractCourses(text):
     coursesList = []
-    courses = re.findall(r'">\d+,\d+ CR.*?[\dMS]', text) 
+    courses = re.findall(r'["d]>\d+,\d+ CR.*?[\dMS]', text) 
     for course in courses:
         course = re.findall('\d+\.\d+|[\dMS]', course.replace(',','.'))
         coursesList.append(course)
@@ -68,7 +68,7 @@ if __name__ == '__main__':
         try:
             print('**************GPA in VAMK*****************')    
             stuID = input('Input your student ID: ')
-            password = input('Input your password: ')
+            password = getpass.getpass('Input your password: ')
             if stuID == '' or password == '':
                 raise Exception
             print('Please Wait for a moment..................\n')

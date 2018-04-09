@@ -99,6 +99,6 @@ if __name__ == '__main__':
             print('\nError! Please confirm your student ID/password and if there is network connection.')
         finally:
             print('------------------------------------------')
-        if(platform.system() == 'Linux' or input('Input "q" to continue, or any other key to continue:') == 'q'):
+        if(platform.system() == 'Linux' or input('Input "q" to quit, or any other key to continue:') == 'q'):
             print('Bye bye! ---- Lebs')
             break
